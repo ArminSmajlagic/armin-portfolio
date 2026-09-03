@@ -15,7 +15,14 @@ import React from "react";
 import { FaLinkedin } from "react-icons/fa";
 import { FaGithub } from "react-icons/fa";
 
-function Reveal({ children, className = "", delay = 0, as: Tag = "div" }) {
+type RevealProps = {
+  children: React.ReactNode;
+  className?: string;
+  delay?: number;
+  as?: keyof JSX.IntrinsicElements;
+};
+
+function Reveal({ children, className = "", delay = 0, as = "div" }: RevealProps) {
   const ref = React.useRef(null);
   const [visible, setVisible] = React.useState(false);
   const lastScrollY = React.useRef(typeof window !== "undefined" ? window.scrollY : 0);
