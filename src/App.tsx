@@ -49,7 +49,7 @@ function Reveal({ children, className = "", delay = 0, as: Tag = "div" }: Reveal
             setVisible(false);
           }
         },
-        { threshold: 0.15, rootMargin: "0px 0px -35% 0px" }
+        { threshold: 0.2, rootMargin: "0px 0px -25% 0px" }
     );
     observer.observe(node);
     return () => observer.disconnect();
