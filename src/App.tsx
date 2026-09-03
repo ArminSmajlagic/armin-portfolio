@@ -19,14 +19,14 @@ type RevealProps = {
   children: React.ReactNode;
   className?: string;
   delay?: number;
-  as?: keyof JSX.IntrinsicElements;
+  as?: React.ElementType;
 };
 
-function Reveal({ children, className = "", delay = 0, as = "div" }: RevealProps) {
-  const ref = React.useRef(null);
+function Reveal({ children, className = "", delay = 0, as: Tag = "div" }: RevealProps) {
+  const ref = React.useRef<HTMLElement>(null);
   const [visible, setVisible] = React.useState(false);
   const lastScrollY = React.useRef(typeof window !== "undefined" ? window.scrollY : 0);
-  const scrollDir = React.useRef("down");
+  const scrollDir = React.useRef<"up" | "down">("down");
 
   React.useEffect(() => {
     const onScroll = () => {
@@ -49,20 +49,20 @@ function Reveal({ children, className = "", delay = 0, as = "div" }: RevealProps
             setVisible(false);
           }
         },
-        { threshold: 0.2, rootMargin: "0px 0px -25% 0px" }
+        { threshold: 0.15, rootMargin: "0px 0px -35% 0px" }
     );
     observer.observe(node);
     return () => observer.disconnect();
   }, []);
 
-  return (
-      <Tag
-          ref={ref}
-          className={`bio-reveal${visible ? " is-visible" : ""}${className ? ` ${className}` : ""}`}
-          style={{ transitionDelay: `${delay}ms` }}
-      >
-        {children}
-      </Tag>
+  return React.createElement(
+      Tag,
+      {
+        ref,
+        className: `bio-reveal${visible ? " is-visible" : ""}${className ? ` ${className}` : ""}`,
+        style: { transitionDelay: `${delay}ms` },
+      },
+      children
   );
 }
 
