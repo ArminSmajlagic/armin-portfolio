@@ -668,6 +668,31 @@ export default function BioSite() {
           .bio-headline { font-size: 36px; }
           .bio-h2 { font-size: 28px; }
         }
+        @media (max-width: 640px) {
+        .bio-nav {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 12px;
+          padding: 20px 0;
+        }
+        .bio-nav-links {
+          gap: 16px;
+          flex-wrap: wrap;
+          width: 100%;
+        }
+        .bio-nav-links a {
+          font-size: 13px;
+        }
+      }
+      
+      @media (max-width: 380px) {
+        .bio-nav-links {
+          gap: 10px;
+        }
+        .bio-nav-links a {
+          font-size: 12px;
+        }
+      }
       `}</style>
 
         <div className="bio-root">
